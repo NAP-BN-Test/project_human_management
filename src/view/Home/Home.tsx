@@ -8,74 +8,41 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
-    SafeAreaView,
-    ScrollView,
     View,
     Text,
-    StatusBar,
+    useWindowDimensions,
 } from 'react-native';
-
-import {
-    Header,
-    LearnMoreLinks,
-    Colors,
-    DebugInstructions,
-    ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import stylesHome from './styleHome';
-import Menu from '../../component/MenuItem/Menu'
-
+import { NavigationContainer } from '@react-navigation/native'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import DrawerContent from './DrawerContents';
+import ShoppingRequest from '../Shopping-Request/Request';
+import Payment from '../Payment/payment';
 declare const global: { HermesInternal: null | {} };
-
-const HomeController = () => {
+const Drawer = createDrawerNavigator();
+function Profile() {
     return (
-        <>
-            <Menu />
-            <StatusBar barStyle="dark-content" />
-            <SafeAreaView>
-                <ScrollView
-                    contentInsetAdjustmentBehavior="automatic"
-                    style={stylesHome.scrollView}>
-                    {/* <Colors /> */}
-                    <Header />
-                    {global.HermesInternal == null ? null : (
-                        <View style={stylesHome.engine}>
-                            <Text style={stylesHome.footer}>Engine: Hermes</Text>
-                        </View>
-                    )}
-                    <View style={stylesHome.body}>
-                        <View style={stylesHome.sectionContainer}>
-                            <Text style={stylesHome.sectionTitle}>Step One</Text>
-                            <Text style={stylesHome.sectionDescription}>
-                                Edit <Text style={stylesHome.highlight}>App.tsx</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-                        </View>
-                        <View style={stylesHome.sectionContainer}>
-                            <Text style={stylesHome.sectionTitle}>See Your Changes</Text>
-                            <Text style={stylesHome.sectionDescription}>
-                                <ReloadInstructions />
-                            </Text>
-                        </View>
-                        <View style={stylesHome.sectionContainer}>
-                            <Text style={stylesHome.sectionTitle}>Debug</Text>
-                            <Text style={stylesHome.sectionDescription}>
-                                <DebugInstructions />
-                            </Text>
-                        </View>
-                        <View style={stylesHome.sectionContainer}>
-                            <Text style={stylesHome.sectionTitle}>Learn More</Text>
-                            <Text style={stylesHome.sectionDescription}>
-                                Read the docs to discover what to do next:
-              </Text>
-                        </View>
-                        <LearnMoreLinks />
-                    </View>
-                </ScrollView>
-            </SafeAreaView>
-        </>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Profile Screen</Text>
+        </View>
+    );
+}
+const HomeController = () => {
+    const dimensions = useWindowDimensions();
+    const isLargeScreen = dimensions.width >= 768;
+    return (
+        <NavigationContainer>
+            <Drawer.Navigator
+                openByDefault
+                drawerType={isLargeScreen ? 'permanent' : 'back'}
+                drawerStyle={isLargeScreen ? null : { width: '70%' }}
+                overlayColor="transparent"
+                drawerContent={props => <DrawerContent {...props} />}>
+                <Drawer.Screen name="ShoppingRequest" component={ShoppingRequest} />
+                <Drawer.Screen name="Payment" component={Payment} />
+            </Drawer.Navigator>
+        </NavigationContainer>
     );
 };
 

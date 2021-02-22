@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import { Actions } from 'react-native-router-flux';
 import { Services } from '../../services/services';
 import * as constants from '../constants';
@@ -13,6 +14,8 @@ function request(user: string) { return { type: constants.LOGIN, user: user } }
 
 function success(username: string) { return { type: constants.ALERT_SUCCESS, message: username } }
 
+function func_request_shopping(request: string) { return { type: constants.REQUEST_SHOPPING, request: request } }
+
 function act_login(users: User) {
     return (dispatch: any) => {
         let body = {
@@ -22,7 +25,8 @@ function act_login(users: User) {
         Services.login(body)
             .then(async (res) => {
                 if (res.status == '1') {
-
+                    await AsyncStorage.setItem('staffName', res.obj.staffName)
+                    await AsyncStorage.setItem('staffCode', res.obj.staffCode)
                     dispatch(success("Hello " + res.obj.name))
                     let user = res.obj
                     dispatch(request(user))
@@ -40,14 +44,24 @@ function act_login(users: User) {
     // server: servers,
     // statusLogin: statusLogins
 };
+function act_get_requestshopping() {
+    return (dispatch: any) => {
+        let body = {
+            ip: 1
+        }
+        Services.get_list_request_shopping(body)
+            .then(res => {
+                if (res.status == '1') {
+                    let request = res.arrayInfoCC
+                    dispatch(func_request_shopping(request))
+                } else {
+                    dispatch(act_alert_error("empty"))
+                }
+            }
+            );
+    }
+};
 export const Action = {
     act_login,
-    // act_alert_success,
-    // act_alert_error,
-    // act_alert_clear,
-    // act_get_hientruong,
-    // act_changestatushientruong,
-    // act_get_container,
-    // act_changestatusvanchuyen,
-    // act_get_hientruongcheked
+    act_get_requestshopping
 }

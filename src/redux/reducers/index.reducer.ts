@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import rdc_alert from './alert.reducer';
 import rdc_login from './login.reducer';
+import rdc_request_shopping from './request.reducer';
 // import rdc_register_server from './registerserver.reducer';
 // import rdc_login from './login.reducer';
 // import rdc_alert from './alert.reducer';
@@ -16,7 +17,7 @@ export const rootReducer = combineReducers({
     // hientruong: rdc_hientruong,
     // container: rdc_container,
     // parking: rdc_parking,
-    // hientruongchecked: rdc_hientruong_checked
+    request_shopping: rdc_request_shopping,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

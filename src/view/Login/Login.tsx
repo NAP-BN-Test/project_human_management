@@ -6,11 +6,11 @@ import { Action } from '../../redux/actions/index.action';
 import {
     StyleSheet,
     Text,
-    View,
     TextInput,
     Button,
     TouchableHighlight,
     Image,
+    View,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import stylesLogin from './styleLogin';
@@ -38,6 +38,9 @@ const Login = () => {
         const autologin = async () => {
             userLogin.userName = await AsyncStorage.getItem('username') || ''
             userLogin.passWord = await AsyncStorage.getItem('password') || ''
+            if (userLogin.userName !== null && userLogin.passWord !== null && userLogin.userName !== '' && userLogin.passWord !== '') {
+                dispatch(Action.act_login(userLogin))
+            }
         }
         autologin()
     }, [])
@@ -62,7 +65,6 @@ const Login = () => {
     const [value, setValue] = useState(false);
     // value ban đầu bằng false
     const click = async () => {
-        console.log(value);
         if (value)
             setValue(false)
         else
@@ -85,12 +87,7 @@ const Login = () => {
                 style={stylesLogin.imgbox}
                 source={require('../../asset/img/logo.png')} />
             <View style={stylesLogin.inputContainer}>
-                <Image style={stylesLogin.inputIcon} source={{ uri: 'https://png.icons8.com/message/ultraviolet/50/3498db' }} />
-                {/* <TextInput style={stylesLogin.inputs}
-                    placeholder="Email"
-                    keyboardType="email-address"
-                    underlineColorAndroid='transparent'
-                    onChangeText={(email) => this.setState({ email })} /> */}
+                <Image style={stylesLogin.inputIcon} source={require('../../asset/img/email.png')} />
                 <TextInput style={stylesLogin.inputs}
                     placeholder="Email"
                     onChangeText={(email) => userLogin.userName = email}
@@ -99,12 +96,7 @@ const Login = () => {
             </View>
 
             <View style={stylesLogin.inputContainer}>
-                <Image style={stylesLogin.inputIcon} source={{ uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db' }} />
-                {/* <TextInput style={stylesLogin.inputs}
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    underlineColorAndroid='transparent'
-                    onChangeText={(password) => this.setState({ password })} /> */}
+                <Image style={stylesLogin.inputIcon} source={require('../../asset/img/padlock.png')} />
                 <TextInput style={stylesLogin.inputs}
                     placeholder="Password"
                     onChangeText={(pass) => userLogin.passWord = pass}
@@ -113,23 +105,14 @@ const Login = () => {
                     underlineColorAndroid='transparent' />
             </View>
 
-            {/* <TouchableHighlight style={[stylesLogin.buttonContainer, stylesLogin.loginButton]} onPress={() => this.onClickListener('login')}>
+            <TouchableHighlight style={[stylesLogin.buttonContainer, stylesLogin.loginButton]} onPress={login}>
                 <Text style={stylesLogin.loginText}>Login</Text>
-            </TouchableHighlight> */}
-            <TouchableHighlight style={[stylesLogin.buttonContainer, stylesLogin.loginButton]}>
-                <Text style={stylesLogin.loginText} onPress={login}>Login</Text>
             </TouchableHighlight>
 
-            {/* <TouchableHighlight style={stylesLogin.buttonContainer} onPress={() => this.onClickListener('restore_password')}>
-                <Text>Forgot your password?</Text>
-            </TouchableHighlight> */}
             <TouchableHighlight style={stylesLogin.buttonContainer}>
                 <Text>Forgot your password?</Text>
             </TouchableHighlight>
 
-            {/* <TouchableHighlight style={stylesLogin.buttonContainer} onPress={() => this.onClickListener('register')}>
-                <Text>Register</Text>
-            </TouchableHighlight> */}
             <TouchableHighlight style={stylesLogin.buttonContainer}>
                 <Text>Register</Text>
             </TouchableHighlight>

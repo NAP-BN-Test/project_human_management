@@ -1,8 +1,12 @@
+import { NavigationContainer } from '@react-navigation/native'
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import React, { useEffect } from 'react'
 import { Scene, Router, ActionConst, Tabs } from 'react-native-router-flux'
 import HomeController from './view/Home/Home'
 import Login from './view/Login/Login'
+import Request from './view/Shopping-Request/Request'
 // import Home from './View/Home/Home'
+const Drawer = createDrawerNavigator();
 
 const Routes = () => {
 
@@ -11,24 +15,10 @@ const Routes = () => {
             <Scene key="root">
                 <Scene key="Login" component={Login} hideNavBar={true} />
                 <Scene key="Home" component={HomeController} hideNavBar={true} />
-                {/* <Tabs
-               title='Hiện Trường'
-               tabBarPosition='top'
-               key="tabbar"
-               showLabel={true} 
-               lazy={true}
-               // wrap={false}
-               swipeEnabled
-               tabBarStyle={{ backgroundColor: '#fff' }}
-               labelStyle={{ color: 'blue', fontWeight: 'bold' }}
-               indicatorStyle={{ backgroundColor: 'blue' }}
-            >
-               <Scene key="home" component={Home} tabBarLabel="Thực Hiện" back={false} hideNavBar={true}/>
-               <Scene key="hientruongcheked" component={CheckedHT} tabBarLabel='Hoàn Thành' back={false} hideNavBar={true}/>
-            </Tabs>
-            <Scene key="kiemdem" component={KiemDem} title='Kiểm Đếm' /> */}
+                <Scene key="Requests" component={Request} back={false} tabBarLabel='Hoàn Thành' />
             </Scene>
         </Router>
     )
 }
 export default Routes
+

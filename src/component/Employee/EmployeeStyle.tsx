@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const stylesHome = StyleSheet.create({
+const stylesEmployee = StyleSheet.create({
     scrollView: {
         backgroundColor: Colors.lighter,
     },
@@ -44,7 +44,6 @@ const stylesHome = StyleSheet.create({
     },
     userInfoSection: {
         paddingLeft: 20,
-        marginTop: 10,
     },
     title: {
         fontSize: 16,
@@ -70,7 +69,7 @@ const stylesHome = StyleSheet.create({
         marginRight: 3,
     },
     drawerSection: {
-        marginTop: 30,
+        marginTop: 15,
     },
     bottomDrawerSection: {
         marginBottom: 15,
@@ -85,4 +84,4 @@ const stylesHome = StyleSheet.create({
     },
 });
 
-export default stylesHome;
+export default stylesEmployee;

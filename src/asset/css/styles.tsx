@@ -22,6 +22,7 @@ type Style = {
     bodyTittleText: TextStyle,
     bodyContentText: TextStyle,
     boderItem: ViewStyle
+    headerStyle: ViewStyle
 };
 
 export default StyleSheet.create<Style>({
@@ -151,5 +152,8 @@ export default StyleSheet.create<Style>({
         fontSize: 15,
         fontWeight: 'bold',
         marginBottom: 5
-    }
+    },
+    headerStyle: {
+        backgroundColor: '#325B8C',
+    },
 })

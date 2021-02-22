@@ -26,4 +26,16 @@ export interface Container {
     no_seal: string
     statusVanChuyen: string
 }
+
+export interface RequestSh {
+    id: number
+    departmentName: number
+    staffName: string
+    requireDate: string
+    amount: number
+    status: string
+    nameAsset: string
+    reason: string,
+}
+
 export type toggleCheckIn = (container: Container) => void
