@@ -64,7 +64,10 @@ const ShoppingRequest = () => {
   console.log('REQUEST', requests);
 
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+      }}>
       <Appbar.Header style={styles.headerStyle} dark={true}>
         <Appbar.Action
           icon={require('../../asset/img/left-arrow.png')}

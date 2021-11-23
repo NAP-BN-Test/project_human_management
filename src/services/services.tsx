@@ -26,6 +26,7 @@ function get_list_request_shopping(req: any) {
     dbName: req.dbName,
     secretKey: req.secretKey,
     userID: req.id,
+    type: 'approval',
   };
   return axios
     .post(`${URL}/qlnb/get_list_tbl_yeucaumuasam`, body)
