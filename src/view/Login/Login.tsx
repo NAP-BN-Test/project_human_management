@@ -55,13 +55,13 @@ const Login = () => {
   //     const autologin = async () => {
   //         console.log(2);
 
-  //         // userLogin.userName = await AsyncStorage.getItem('username') || null
-  //         // userLogin.passWord = await AsyncStorage.getItem('password') || null
-  //         // infoServer.ip = await AsyncStorage.getItem('ip') || null
-  //         // infoServer.dbName = await AsyncStorage.getItem('dbName') || null
-  //         // if (userLogin.userName !== null && userLogin.passWord !== null && infoServer.ip !== null && infoServer.dbName !== null) {
-  //         //     dispatch(Action.act_login(userLogin, infoServer))
-  //         // }
+  //         userLogin.userName = await AsyncStorage.getItem('username') || null
+  //         userLogin.passWord = await AsyncStorage.getItem('password') || null
+  //         infoServer.ip = await AsyncStorage.getItem('ip') || null
+  //         infoServer.dbName = await AsyncStorage.getItem('dbName') || null
+  //         if (userLogin.userName !== null && userLogin.passWord !== null && infoServer.ip !== null && infoServer.dbName !== null) {
+  //             dispatch(Action.act_login(userLogin, infoServer))
+  //         }
   //     }
   //     autologin()
   // }, [value])
