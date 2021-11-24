@@ -37,6 +37,7 @@ export interface RequestSh {
   status: string;
   nameAsset: string;
   reason: string;
+  arrayTaiSanApp: any[];
 }
 
 export type toggleCheckIn = (container: Container) => void;

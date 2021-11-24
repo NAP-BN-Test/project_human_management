@@ -63,6 +63,29 @@ const ShoppingRequest = () => {
 
   console.log('REQUEST', requests);
 
+  const requestValue = (data: any) => {
+    return data.map((value: any) => {
+      return (
+        <View>
+          <View
+            style={{
+              flexDirection: 'row',
+            }}>
+            <Text style={{fontWeight: 'bold'}}>TÊN TS/TB/LK:</Text>
+            <Text style={{paddingLeft: 5}}>{value.name}</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+            }}>
+            <Text style={{fontWeight: 'bold'}}>Số lượng:</Text>
+            <Text style={{paddingLeft: 5}}>{value.amount}</Text>
+          </View>
+        </View>
+      );
+    });
+  };
+
   return (
     <View
       style={{
@@ -74,14 +97,6 @@ const ShoppingRequest = () => {
           onPress={_goBack}
         />
         <Appbar.Content title="Yêu cầu mua sắm" />
-        <Appbar.Action
-          icon={require('../../asset/img/search.png')}
-          onPress={_handleSearch}
-        />
-        <Appbar.Action
-          icon={require('../../asset/img/more.png')}
-          onPress={_handleMore}
-        />
       </Appbar.Header>
       <FlatList
         data={requests}
@@ -113,27 +128,22 @@ const ShoppingRequest = () => {
                     </Text>
                   </View>
                   <View style={{flexDirection: 'row'}}>
-                    <Text style={{fontWeight: 'bold'}}>Ngày đề xuất:</Text>
-                    <Text style={{marginLeft: 5}}>{item.requireDate}</Text>
-                    <Text style={{fontWeight: 'bold', marginLeft: 35}}>
-                      Số lượng:
+                    <Text style={{fontWeight: 'bold', fontSize: 15}}>
+                      Ngày đề xuất:
                     </Text>
-                    <Text style={{marginLeft: 5}}>{item.amount}</Text>
+                    <Text style={{marginLeft: 5, fontSize: 15}}>
+                      {item.requireDate}
+                    </Text>
                   </View>
+
+                  {requestValue(item.arrayTaiSanApp)}
+
                   <View style={{flexDirection: 'row'}}>
                     <Text style={{fontSize: 15, fontWeight: 'bold'}}>
                       Trạng thái:
                     </Text>
                     <Text style={{marginLeft: 5, fontSize: 15}}>
                       {item.status}
-                    </Text>
-                  </View>
-                  <View style={{flexDirection: 'row'}}>
-                    <Text style={{fontWeight: 'bold', fontSize: 15}}>
-                      TÊN TS/TB/LK:
-                    </Text>
-                    <Text style={{marginLeft: 5, fontSize: 15}}>
-                      {item.nameAsset}
                     </Text>
                   </View>
                   <View style={{flexDirection: 'row'}}>

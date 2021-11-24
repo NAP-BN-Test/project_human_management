@@ -11,6 +11,7 @@ const item_request_shopping = {
   status: '',
   nameAsset: '',
   reason: '',
+  arrayTaiSanApp: [],
 };
 
 const initState = [item_request_shopping];
@@ -23,13 +24,14 @@ const rdc_request_shopping = (state = initState, action: any) => {
       return action.request.map((shopping: any) => {
         return {
           id: shopping.id,
-          departmentName: shopping.departmentName,
-          staffName: shopping.staffName,
+          departmentName: shopping.namePhongBan,
+          staffName: shopping.nameIDNhanVien,
           requireDate: shopping.requireDate,
           amount: shopping.amount,
           status: shopping.status,
           nameAsset: shopping.nameAsset,
           reason: shopping.reason,
+          arrayTaiSanApp: JSON.parse(shopping.arrayTaiSanApp),
         };
       });
     default:
