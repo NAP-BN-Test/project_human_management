@@ -19,8 +19,6 @@ const initState = [item_request_shopping];
 const rdc_request_shopping = (state = initState, action: any) => {
   switch (action.type) {
     case REQUEST_SHOPPING:
-      console.log('action', action.request);
-
       return action.request.map((shopping: any) => {
         return {
           id: shopping.id,

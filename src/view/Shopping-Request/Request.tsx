@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import stylesPayment from '../../view/Payment/stylePayment';
 import Swipeout from 'react-native-swipeout';
 import {withNavigationFocus} from 'react-navigation';
+import {Services} from '../../services/services';
 
 const ShoppingRequest = () => {
   const dispatch = useDispatch();
@@ -32,41 +33,29 @@ const ShoppingRequest = () => {
   const _goBack = () => {
     navigation.goBack();
   };
-  const _handleMore = () => console.log('Shown more');
-  var swipeoutBtns = [
-    {
-      text: 'Phê duyệt',
-      backgroundColor: '#0097A7',
-      // underlayColor: '#000000',
 
-      onPress: () => {
-        _handlePD();
-      },
-      autoClose: true,
-      // color: '#000000'
-    },
-    {
-      text: 'Từ chối',
-      backgroundColor: '#FBC02D',
-      // underlayColor: '#000000',
+  async function _handlePD(value: any) {
+    if (value.status === 'Chờ phê duyệt') {
+      await dispatch(Action.act_approval_request_first(value.id));
+    } else {
+      await dispatch(Action.act_approval_request_second(value.id));
+    }
+    await dispatch(Action.act_get_requestshopping());
+  }
 
-      onPress: () => {
-        _handleTC();
-      },
-      autoClose: true,
-      color: '#000000',
-    },
-  ];
-  const _handleSearch = () => console.log('Searching');
-  const _handlePD = () => console.log('Phê duyệt');
-  const _handleTC = () => console.log('Từ chối');
-
-  console.log('REQUEST', requests);
+  async function _handleTC(value: any) {
+    if (value.status === 'Chờ phê duyệt') {
+      await dispatch(Action.act_refuse_first_approval(value.id));
+    } else {
+      await dispatch(Action.act_refuse_second_approval(value.id));
+    }
+    await dispatch(Action.act_get_requestshopping());
+  }
 
   const requestValue = (data: any) => {
-    return data.map((value: any) => {
+    return data.map((value: any, index: number) => {
       return (
-        <View>
+        <View key={index}>
           <View
             style={{
               flexDirection: 'row',
@@ -91,7 +80,7 @@ const ShoppingRequest = () => {
       style={{
         flex: 1,
       }}>
-      <Appbar.Header style={styles.headerStyle} dark={true}>
+      <Appbar.Header style={styles.headerStyle}>
         <Appbar.Action
           icon={require('../../asset/img/left-arrow.png')}
           onPress={_goBack}
@@ -100,9 +89,27 @@ const ShoppingRequest = () => {
       </Appbar.Header>
       <FlatList
         data={requests}
+        keyExtractor={(item: any) => item.id.toString()}
         renderItem={({item}: any) => {
           return (
-            <Swipeout right={swipeoutBtns}>
+            <Swipeout
+              right={[
+                {
+                  text: 'Phê duyệt',
+                  backgroundColor: '#0097A7',
+                  onPress: () => {
+                    _handlePD(item);
+                  },
+                },
+                {
+                  text: 'Từ chối',
+                  backgroundColor: '#FBC02D',
+                  onPress: () => {
+                    _handleTC(item);
+                  },
+                  color: '#000000',
+                },
+              ]}>
               <View style={stylesPayment.elementView}>
                 <View>
                   <Image
@@ -163,4 +170,4 @@ const ShoppingRequest = () => {
   );
 };
 
-export default withNavigationFocus(ShoppingRequest);
+export default ShoppingRequest;
