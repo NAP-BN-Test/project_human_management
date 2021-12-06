@@ -82,7 +82,6 @@ const DrawerContent = (props: any) => {
                 label="Đề nghị thanh toán"
                 onPress={() => {
                   props.navigation.navigate('Payment');
-                  console.log(910);
                 }}
               />
             </Drawer.Section>

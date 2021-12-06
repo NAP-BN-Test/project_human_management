@@ -42,6 +42,26 @@ function func_refuse_second_approval(request: string) {
   return {type: constants.REFUSE_SECOND_APPROVAL, request: request};
 }
 
+function func_payorder(request: string) {
+  return {type: constants.PAYORDER, request: request};
+}
+
+function func_approval_employee_accountant(request: string) {
+  return {type: constants.APPROVAL_EMPLOYEE_ACCOUNTANT, request: request};
+}
+
+function func_approval_employee_leader(request: string) {
+  return {type: constants.APPROVAL_EMPLOYEE_LEADER, request: request};
+}
+
+function func_refuse_employee_accountant(request: string) {
+  return {type: constants.REFUSE_EMPLOYEE_ACCOUNTANT, request: request};
+}
+
+function func_refuse_employee_leader(request: string) {
+  return {type: constants.REFUSE_EMPLOYEE_LEADER, request: request};
+}
+
 var userInfo = {
   id: 0,
   token: '',
@@ -154,6 +174,90 @@ function act_refuse_second_approval(id: number) {
   };
 }
 
+function act_get_payorder() {
+  return (dispatch: any) => {
+    let body = {
+      id: userInfo.id,
+    };
+    Services.get_list_payorder(body).then((res) => {
+      if (res.status == '1') {
+        let request = res.array;
+        dispatch(func_payorder(request));
+      } else {
+        dispatch(act_alert_error('empty'));
+      }
+    });
+  };
+}
+
+function act_approval_employee_accountant(id: number) {
+  return (dispatch: any) => {
+    let body = {
+      id: id,
+      token: userInfo.token,
+    };
+    Services.approval_employee_accountant(body).then((res: any) => {
+      if (res.data.status == '1') {
+        dispatch(func_approval_employee_accountant(res));
+        dispatch(act_alert_error(res.data.message));
+      } else {
+        dispatch(act_alert_error('empty'));
+      }
+    });
+  };
+}
+
+function act_approval_employee_leader(id: number) {
+  return (dispatch: any) => {
+    let body = {
+      id: id,
+      token: userInfo.token,
+    };
+    Services.approval_employee_leader(body).then((res: any) => {
+      if (res.data.status == '1') {
+        dispatch(func_approval_employee_leader(res));
+        dispatch(act_alert_error(res.data.message));
+      } else {
+        dispatch(act_alert_error('empty'));
+      }
+    });
+  };
+}
+
+function act_refuse_employee_accountant(id: number) {
+  return (dispatch: any) => {
+    let body = {
+      id: id,
+      token: userInfo.token,
+    };
+    Services.refuse_employee_accountant(body).then((res: any) => {
+      if (res.data.status == '1') {
+        dispatch(func_refuse_employee_accountant(res));
+        dispatch(act_alert_error(res.data.message));
+      } else {
+        dispatch(act_alert_error('empty'));
+      }
+    });
+  };
+}
+
+function act_refuse_employee_leader(id: number) {
+  return (dispatch: any) => {
+    let body = {
+      id: id,
+      token: userInfo.token,
+    };
+    Services.refuse_employee_leader(body).then((res: any) => {
+      if (res.data.status == '1') {
+        dispatch(func_refuse_employee_leader(res));
+        dispatch(act_alert_error(res.data.message));
+      } else {
+        dispatch(act_alert_error('empty'));
+      }
+    });
+  };
+}
+
 export const Action = {
   act_login,
   act_get_requestshopping,
@@ -161,4 +265,13 @@ export const Action = {
   act_approval_request_second,
   act_refuse_first_approval,
   act_refuse_second_approval,
+  act_get_payorder,
+  func_approval_employee_accountant,
+  func_approval_employee_leader,
+  func_refuse_employee_accountant,
+  func_refuse_employee_leader,
+  act_approval_employee_accountant,
+  act_approval_employee_leader,
+  act_refuse_employee_accountant,
+  act_refuse_employee_leader,
 };

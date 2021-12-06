@@ -40,4 +40,16 @@ export interface RequestSh {
   arrayTaiSanApp: any[];
 }
 
+export interface PayOrder {
+  id: number;
+  departmentName: string;
+  nameNhanVien: string;
+  objectName: string;
+  reason: string;
+  money: number;
+  typeMoney: string;
+  trangThaiPheDuyetLD: string;
+  trangThaiPheDuyetKT: string;
+}
+
 export type toggleCheckIn = (container: Container) => void;
