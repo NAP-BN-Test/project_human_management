@@ -120,15 +120,12 @@ const ShoppingRequest = () => {
                 <View style={{marginLeft: 10}}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={{fontWeight: 'bold', fontSize: 15}}>
-                      Bộ phận đề nghị:
-                    </Text>
-                    <Text style={{marginLeft: 5, fontSize: 15}}>
-                      {item.departmentName}
+                      Bộ phận: {item.departmentName}
                     </Text>
                   </View>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={{fontWeight: 'bold', fontSize: 15}}>
-                      Nhân viên đề nghị:
+                      Nhân viên:
                     </Text>
                     <Text style={{marginLeft: 5, fontSize: 15}}>
                       {item.staffName}
